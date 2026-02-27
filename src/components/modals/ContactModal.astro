@@ -1,0 +1,46 @@
+---
+/* ContactModal — dark-themed contact links */
+import Modal from "../Modal.astro";
+import { profile } from "../../data/profile.js";
+---
+
+<Modal modalId="modal-contact" title="Contact">
+  <div class="space-y-6">
+    <!-- Email -->
+    <div>
+      <p class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-2">Email</p>
+      <a
+        href={`mailto:${profile.email}`}
+        class="text-sm text-gray-400 hover:text-white transition-all duration-200 ease-in-out"
+      >
+        {profile.email}
+      </a>
+    </div>
+
+    <!-- LinkedIn -->
+    <div>
+      <p class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-2">LinkedIn</p>
+      <a
+        href={profile.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-gray-400 hover:text-white transition-all duration-200 ease-in-out"
+      >
+        View Profile →
+      </a>
+    </div>
+
+    <!-- GitHub -->
+    <div>
+      <p class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-2">GitHub</p>
+      <a
+        href={profile.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm text-gray-400 hover:text-white transition-all duration-200 ease-in-out"
+      >
+        View Profile →
+      </a>
+    </div>
+  </div>
+</Modal>

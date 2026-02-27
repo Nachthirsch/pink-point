@@ -1,0 +1,45 @@
+---
+/* SkillsModal — dark-themed skills content */
+import Modal from "../Modal.astro";
+import { skills } from "../../data/skills.js";
+---
+
+<Modal modalId="modal-skills" title="Skills">
+  <div class="space-y-8">
+    <!-- Technical -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Technical</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.technical.map((skill) => (
+          <span class="text-xs px-3 py-1 border border-gray-800 text-gray-400 rounded-none">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Languages</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.languages.map((lang) => (
+          <span class="text-xs px-3 py-1 border border-gray-800 text-gray-400 rounded-none">
+            {lang.name} — {lang.level}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Interests</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.interests.map((interest) => (
+          <span class="text-xs px-3 py-1 border border-gray-800 text-gray-400 rounded-none">
+            {interest}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</Modal>

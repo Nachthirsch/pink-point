@@ -1,0 +1,31 @@
+---
+/* EducationModal — dark-themed academic background */
+import Modal from "../Modal.astro";
+---
+
+<Modal modalId="modal-education" title="Education">
+  <div class="space-y-6">
+    <!-- University -->
+    <div class="border-b border-gray-800 pb-6">
+      <div class="flex items-start justify-between gap-4">
+        <h3 class="text-sm font-semibold text-white">Bina Sarana Informatika University</h3>
+        <span class="text-xs text-gray-600 whitespace-nowrap mt-0.5">2021 – 2025</span>
+      </div>
+      <p class="text-sm text-gray-400 mt-1">Bachelor of Information Technology</p>
+      <p class="text-xs text-gray-600 mt-1">Depok City, West Java</p>
+      <div class="mt-3">
+        <span class="text-xs px-3 py-1 border border-gray-800 text-gray-500 rounded-none">GPA: 4.00</span>
+      </div>
+    </div>
+
+    <!-- Bootcamp -->
+    <div>
+      <div class="flex items-start justify-between gap-4">
+        <h3 class="text-sm font-semibold text-white">Hacktiv8</h3>
+        <span class="text-xs text-gray-600 whitespace-nowrap mt-0.5">Sep 2024 – Dec 2024</span>
+      </div>
+      <p class="text-sm text-gray-400 mt-1">ReactJS for Front-end Website Developer</p>
+      <p class="text-xs text-gray-600 mt-1">Remote</p>
+    </div>
+  </div>
+</Modal>

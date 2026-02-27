@@ -1,0 +1,210 @@
+---
+/* index.astro — main page: hero, button grid, all modals, and modal JS */
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import NavButton from "../components/NavButton.astro";
+import ExperienceModal from "../components/modals/ExperienceModal.astro";
+import ProjectsModal from "../components/modals/ProjectsModal.astro";
+import SkillsModal from "../components/modals/SkillsModal.astro";
+import CertificatesModal from "../components/modals/CertificatesModal.astro";
+import EducationModal from "../components/modals/EducationModal.astro";
+import ContactModal from "../components/modals/ContactModal.astro";
+---
+
+<BaseLayout>
+  <main class="h-screen overflow-hidden flex flex-col items-center justify-center px-6">
+
+    <!-- Framed card — semi-transparent so the GIF background shows through -->
+    <div class="card-frame w-full max-w-2xl bg-black/70 px-10 py-10 backdrop-blur-sm">
+
+      <!-- Card lineart SVG border trace (animated by JS below) -->
+      <svg class="lineart-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <rect class="lineart-rect card-lineart" x="0.5" y="0.5" rx="0" ry="0" />
+      </svg>
+
+      <!-- Hero section -->
+      <HeroSection />
+
+      <!-- Thin rule between hero and grid -->
+      <div class="mt-8 border-t border-gray-800"></div>
+
+      <!-- Navigation button grid — overflow-hidden contains btn-grid negative margins -->
+      <section class="mt-0 overflow-hidden">
+        <div class="grid grid-cols-2 md:grid-cols-3 btn-grid">
+          <NavButton label="Experience" subtitle="5 roles · 3 years" modalId="modal-experience" />
+          <NavButton label="Projects" subtitle="9 projects" modalId="modal-projects" />
+          <NavButton label="Skills" subtitle="11 technical skills" modalId="modal-skills" />
+          <NavButton label="Certificates" subtitle="11 certificates" modalId="modal-certificates" />
+          <NavButton label="Education" subtitle="S.Kom · GPA 4.00" modalId="modal-education" />
+          <NavButton label="Contact" subtitle="Get in touch" modalId="modal-contact" />
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared modal overlay -->
+  <div
+    id="modal-overlay"
+    class="fixed inset-0 bg-black/60 z-40 hidden opacity-0 transition-opacity duration-200"
+    aria-hidden="true"
+  ></div>
+
+  <!-- All modals -->
+  <ExperienceModal />
+  <ProjectsModal />
+  <SkillsModal />
+  <CertificatesModal />
+  <EducationModal />
+  <ContactModal />
+</BaseLayout>
+
+<script>
+  /* ─── Modal system — centralized open/close logic ─── */
+  const overlay = document.getElementById("modal-overlay");
+  const modals = document.querySelectorAll(".modal");
+  const navButtons = document.querySelectorAll(".nav-btn");
+  let activeModal: HTMLElement | null = null;
+  let triggerButton: Element | null = null;
+
+  function openModal(modalId: string) {
+    closeModal();
+    const modal = document.getElementById(modalId);
+    if (!modal || !overlay) return;
+
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+      overlay.classList.add("opacity-100");
+      overlay.classList.remove("opacity-0");
+
+      /* Smooth panel entrance: fade + scale up + slide up */
+      const panel = modal.querySelector<HTMLElement>(".modal-panel");
+      if (panel) {
+        panel.animate(
+          [
+            { opacity: 0, transform: "scale(0.93) translateY(12px)" },
+            { opacity: 1, transform: "scale(1) translateY(0px)" },
+          ],
+          {
+            duration: 260,
+            easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+            fill: "forwards",
+          }
+        );
+      }
+    });
+
+    activeModal = modal;
+    const closeBtn = modal.querySelector(".modal-close");
+    if (closeBtn instanceof HTMLElement) closeBtn.focus();
+  }
+
+  function closeModal() {
+    if (!activeModal || !overlay) return;
+    overlay.classList.add("opacity-0");
+    overlay.classList.remove("opacity-100");
+    activeModal.classList.add("hidden");
+    overlay.classList.add("hidden");
+    activeModal = null;
+    if (triggerButton instanceof HTMLElement) {
+      triggerButton.focus();
+      triggerButton = null;
+    }
+  }
+
+  navButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const modalId = button.getAttribute("data-modal");
+      if (modalId) { triggerButton = button; openModal(modalId); }
+    });
+  });
+
+  modals.forEach((modal) => {
+    const closeBtn = modal.querySelector(".modal-close");
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  });
+
+  if (overlay) overlay.addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  /* ─── Lineart border trace — SVG stroke-dashoffset ───
+     Uses ResizeObserver so the SVG rect and animation always
+     match the element's actual rendered size, including on
+     mobile and when the viewport changes.
+  ────────────────────────────────────────────────────── */
+
+  /** Recompute the SVG rect + dasharray for an element and return its perimeter */
+  function resizeLineart(el: HTMLElement, rectEl: SVGRectElement, stripeRatio: number): number {
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const perimeter = 2 * (w + h - 1);
+    const stripe = perimeter * stripeRatio;
+    rectEl.setAttribute("width", String(w - 1));
+    rectEl.setAttribute("height", String(h - 1));
+    rectEl.style.strokeDasharray = `${stripe} ${perimeter - stripe}`;
+    rectEl.style.strokeDashoffset = "0";
+    return perimeter;
+  }
+
+  /* — Card: continuous orbit — restarted on every resize — */
+  const cardFrame = document.querySelector<HTMLElement>(".card-frame");
+  const cardRectEl = cardFrame?.querySelector<SVGRectElement>(".card-lineart") ?? null;
+
+  if (cardFrame && cardRectEl) {
+    let cardAnim: Animation | null = null;
+
+    function restartCardLineart() {
+      if (cardAnim) cardAnim.cancel();
+      const perimeter = resizeLineart(cardFrame!, cardRectEl!, 0.25);
+      cardAnim = cardRectEl!.animate(
+        [{ strokeDashoffset: 0 }, { strokeDashoffset: -perimeter }],
+        { duration: 5000, iterations: Infinity, easing: "linear" }
+      );
+    }
+
+    restartCardLineart();
+
+    const cardObserver = new ResizeObserver(() => restartCardLineart());
+    cardObserver.observe(cardFrame);
+  }
+
+  /* — Buttons: orbit on hover — perimeter recalculated on resize — */
+  document.querySelectorAll<HTMLElement>(".nav-btn").forEach((btn) => {
+    const rectEl = btn.querySelector<SVGRectElement>(".btn-lineart");
+    if (!rectEl) return;
+
+    let currentPerimeter = resizeLineart(btn, rectEl, 0.40);
+    let anim: Animation | null = null;
+
+    /* Recalculate dimensions whenever the button resizes */
+    const btnObserver = new ResizeObserver(() => {
+      currentPerimeter = resizeLineart(btn, rectEl, 0.40);
+      /* If animation is running, restart it with the new perimeter */
+      if (anim) {
+        anim.cancel();
+        anim = rectEl.animate(
+          [{ strokeDashoffset: 0 }, { strokeDashoffset: -currentPerimeter }],
+          { duration: 1600, iterations: Infinity, easing: "linear" }
+        );
+      }
+    });
+    btnObserver.observe(btn);
+
+    btn.addEventListener("mouseenter", () => {
+      rectEl.style.opacity = "1";
+      if (anim) anim.cancel();
+      anim = rectEl.animate(
+        [{ strokeDashoffset: 0 }, { strokeDashoffset: -currentPerimeter }],
+        { duration: 1600, iterations: Infinity, easing: "linear" }
+      );
+    });
+
+    btn.addEventListener("mouseleave", () => {
+      rectEl.style.opacity = "0";
+      if (anim) { anim.cancel(); anim = null; }
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+---
+/* HeroSection — inverted version for dark background */
+import { profile } from "../data/profile.js";
+---
+
+<header class="flex flex-col items-center text-center">
+  <!-- Eyebrow label -->
+  <p class="text-xs font-medium tracking-[0.3em] uppercase text-gray-500">Personal Portfolio</p>
+
+  <!-- Full name -->
+  <h1 class="mt-4 text-4xl font-bold tracking-tight leading-none text-white">{profile.fullName}</h1>
+
+  <!-- Title + location row -->
+  <div class="mt-4 flex items-center gap-3 text-sm text-gray-500">
+    <span>{profile.title}</span>
+    <span class="w-1 h-1 rounded-full bg-gray-700 inline-block"></span>
+    <span>{profile.location}</span>
+  </div>
+
+  <!-- Thin horizontal rule -->
+  <div class="mt-6 w-full max-w-xs border-t border-gray-800"></div>
+
+  <!-- Social links -->
+  <div class="mt-5 flex gap-8 text-xs font-medium tracking-[0.2em] uppercase text-gray-600">
+    <a
+      href={`mailto:${profile.email}`}
+      class="hover:text-white transition-all duration-200 ease-in-out"
+    >
+      Email
+    </a>
+    <a
+      href={profile.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-white transition-all duration-200 ease-in-out"
+    >
+      LinkedIn
+    </a>
+    <a
+      href={profile.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-white transition-all duration-200 ease-in-out"
+    >
+      GitHub
+    </a>
+  </div>
+</header>

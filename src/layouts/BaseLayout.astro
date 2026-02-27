@@ -1,0 +1,20 @@
+---
+/* BaseLayout — HTML shell with meta tags and viewport constraint */
+const { title = "Handra Putratama Tanjung — Portfolio", description = "Personal portfolio of Handra Putratama Tanjung, an Information Technology professional based in Bogor, Indonesia." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="text-white antialiased overflow-hidden font-sans">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Tailwind v4 theme configuration */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Page decoration ────────────────────────────────── */
+body {
+  background-color: #0A0A0A;
+  background-image: url('/Permintaan_Video_Abstrak_Line_Art_1.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+}
+
+/* ─── Lineart SVG overlay ────────────────────────────────
+   Absolutely positioned SVG inside each box.
+   JS sets the rect size, stroke-dasharray, and animates
+   stroke-dashoffset so a line segment traces the border.
+──────────────────────────────────────────────────────── */
+.lineart-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 5;
+}
+
+.lineart-rect {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Card rect is always visible (lower opacity) */
+.card-lineart {
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px #ffffff);
+  opacity: 0.5;
+}
+
+/* Button rect only visible on hover (JS toggles opacity) */
+.btn-lineart {
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 3px #000000) drop-shadow(0 0 10px #000000) drop-shadow(0 0 20px rgba(255,255,255,0.4));
+  opacity: 0;
+}
+
+/* ─── Card-frame / nav-btn base ──────────────────────── */
+.card-frame {
+  position: relative;
+  z-index: 0;
+}
+
+.nav-btn {
+  position: relative;
+  z-index: 0;
+}
+
+/* ─── Grid border-collapse ───────────────────────────── */
+.btn-grid > * {
+  margin-top: -1px;
+  margin-left: -1px;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────── */
+.modal-content::-webkit-scrollbar { width: 3px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+.modal-content::-webkit-scrollbar-thumb { background: #374151; border-radius: 9999px; }
+.modal-content::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+/* ─── Text selection ─────────────────────────────────── */
+::selection { background: #FFFFFF; color: #0A0A0A; }
