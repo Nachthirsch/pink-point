@@ -1,5 +1,5 @@
 ---
-/* NavButton — nav button with inline SVG lineart border trace */
+/* NavButton — responsive nav button with inline SVG lineart border trace */
 interface Props {
   label: string;
   subtitle: string;
@@ -12,7 +12,7 @@ const { label, subtitle, modalId } = Astro.props;
 <button
   type="button"
   data-modal={modalId}
-  class="nav-btn group relative flex flex-col items-start justify-end bg-transparent text-white p-5 min-h-[80px] text-left cursor-pointer border border-gray-800 hover:bg-white hover:text-black transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+  class="nav-btn group relative flex flex-col items-start justify-end bg-transparent text-white p-3 sm:p-4 md:p-5 min-h-[64px] sm:min-h-[72px] md:min-h-[80px] text-left cursor-pointer border border-gray-800 hover:bg-white hover:text-black transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
 >
   <!-- Lineart SVG border trace — animated by JS in index.astro -->
   <svg class="lineart-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -20,8 +20,8 @@ const { label, subtitle, modalId } = Astro.props;
   </svg>
 
   <!-- Arrow accent top-right -->
-  <span class="absolute top-4 right-4 text-gray-700 group-hover:text-gray-400 text-xs transition-all duration-200 ease-in-out">→</span>
+  <span class="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 text-gray-700 group-hover:text-gray-400 text-xs transition-all duration-200 ease-in-out">→</span>
 
-  <span class="text-xs font-semibold tracking-[0.2em] uppercase leading-none">{label}</span>
-  <span class="mt-1.5 text-xs font-normal tracking-normal normal-case text-gray-600 group-hover:text-gray-500 transition-all duration-200 ease-in-out leading-none">{subtitle}</span>
+  <span class="text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none">{label}</span>
+  <span class="mt-1 text-[10px] sm:text-xs font-normal tracking-normal normal-case text-gray-600 group-hover:text-gray-500 transition-all duration-200 ease-in-out leading-none">{subtitle}</span>
 </button>

@@ -4,7 +4,7 @@ export const profile = {
   title: "Information Technology",
   location: "Bogor City, West Java, Indonesia",
   email: "handraputratama@gmail.com",
-  linkedin: "#",
-  github: "#",
+  linkedin: "https://www.linkedin.com/in/handra-putratama-tanjung/",
+  github: "https://github.com/Nachthirsch",
   portfolio: "#",
 };

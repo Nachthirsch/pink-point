@@ -52,6 +52,6 @@ export const certificates = [
     name: "ReactJS for Front-end Website Developer",
     issuer: "Hacktiv8",
     date: "Dec 2024",
-    credential: "https://media.licdn.com/dms/image/v2/D562DAQHePggYbWlqoA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1737448452738?e=1738818000&v=beta&t=t-ZuoMQbsO2fJd4svUjT08tnuoT-P36bUU0cy2-ncT0",
+    credential: "https://drive.google.com/drive/folders/14LQmc7rFcmIRUar1JElmmaiOegjHVROm?usp=sharing",
   },
 ];

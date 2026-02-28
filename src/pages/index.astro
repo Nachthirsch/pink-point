@@ -9,14 +9,14 @@ import ProjectsModal from "../components/modals/ProjectsModal.astro";
 import SkillsModal from "../components/modals/SkillsModal.astro";
 import CertificatesModal from "../components/modals/CertificatesModal.astro";
 import EducationModal from "../components/modals/EducationModal.astro";
-import ContactModal from "../components/modals/ContactModal.astro";
+import MbtiModal from "../components/modals/MbtiModal.astro";
 ---
 
 <BaseLayout>
-  <main class="h-screen overflow-hidden flex flex-col items-center justify-center px-6">
+  <main class="min-h-screen overflow-y-auto flex flex-col items-center justify-center px-4 sm:px-6 py-8">
 
     <!-- Framed card — semi-transparent so the GIF background shows through -->
-    <div class="card-frame w-full max-w-2xl bg-black/70 px-10 py-10 backdrop-blur-sm">
+    <div class="card-frame w-full max-w-2xl bg-black/70 px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 backdrop-blur-sm">
 
       <!-- Card lineart SVG border trace (animated by JS below) -->
       <svg class="lineart-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@ import ContactModal from "../components/modals/ContactModal.astro";
       <HeroSection />
 
       <!-- Thin rule between hero and grid -->
-      <div class="mt-8 border-t border-gray-800"></div>
+      <div class="mt-6 sm:mt-8 border-t border-gray-800"></div>
 
       <!-- Navigation button grid — overflow-hidden contains btn-grid negative margins -->
       <section class="mt-0 overflow-hidden">
@@ -37,7 +37,7 @@ import ContactModal from "../components/modals/ContactModal.astro";
           <NavButton label="Skills" subtitle="11 technical skills" modalId="modal-skills" />
           <NavButton label="Certificates" subtitle="11 certificates" modalId="modal-certificates" />
           <NavButton label="Education" subtitle="S.Kom · GPA 4.00" modalId="modal-education" />
-          <NavButton label="Contact" subtitle="Get in touch" modalId="modal-contact" />
+          <NavButton label="MBTI" subtitle="INTP-A · The Logician" modalId="modal-mbti" />
         </div>
       </section>
 
@@ -57,7 +57,7 @@ import ContactModal from "../components/modals/ContactModal.astro";
   <SkillsModal />
   <CertificatesModal />
   <EducationModal />
-  <ContactModal />
+  <MbtiModal />
 </BaseLayout>
 
 <script>
