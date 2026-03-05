@@ -7,6 +7,24 @@ export const certificates = [
     credential: "https://says.bsi.ac.id/e_sertifikat_lykan-MzE3MTE1MTExNTU=.html",
   },
   {
+    name: "Become an AWS Cloud Engineer (Talent Scouting Academy",
+    issuer: "Digital Talent Scholarship",
+    date: "Mar 2024",
+    credential: "https://drive.google.com/file/d/1gzDQfXXCdimIKrbfnDhdhSOuWsB6TjyX/view?usp=drive_link",
+  },
+  {
+    name: "Program Analyst",
+    issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
+    date: "Aug 2024 - Aug 2027",
+    credential: "https://drive.google.com/file/d/1UEAxtFQ5sQQBapcR9lRVq-BT2y0NbEl7/view?usp=drive_link",
+  },
+  {
+    name: "TOEFL Prediction Test",
+    issuer: "Lembaga Bahasa Universitas Bina Sarana Indonesia",
+    date: "Aug 2025",
+    credential: "https://drive.google.com/file/d/1HA4P_CQA3c1B4kywbU12a8KiCMhDNZ6V/view?usp=drive_link",
+  },
+  {
     name: "Network Security",
     issuer: "Cisco Networking Academy",
     date: "Jan 2024",
