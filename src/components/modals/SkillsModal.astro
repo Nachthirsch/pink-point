@@ -1,5 +1,6 @@
 ---
-/* SkillsModal — dark-themed skills content */
+/* SkillsModal — dark-themed skills content with brand icons via astro-icon */
+import { Icon } from "astro-icon/components";
 import Modal from "../Modal.astro";
 import { skills } from "../../data/skills.js";
 ---
@@ -11,8 +12,48 @@ import { skills } from "../../data/skills.js";
       <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Technical</h3>
       <div class="flex flex-wrap gap-2">
         {skills.technical.map((skill) => (
-          <span class="text-xs px-3 py-1 border border-gray-800 text-gray-400 rounded-none">
-            {skill}
+          <span class="inline-flex items-center gap-2 text-xs px-3 py-1.5 border border-gray-800 text-gray-400 rounded-none">
+            <Icon name={skill.icon} class="w-3.5 h-3.5 text-gray-500" aria-hidden="true" />
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Data Processing & Analysis -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Data Processing &amp; Analysis</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.dataProcessing.map((skill) => (
+          <span class="inline-flex items-center gap-2 text-xs px-3 py-1.5 border border-gray-800 text-gray-400 rounded-none">
+            <Icon name={skill.icon} class="w-3.5 h-3.5 text-gray-500" aria-hidden="true" />
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Tools & Platforms -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Tools &amp; Platforms</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.tools.map((tool) => (
+          <span class="inline-flex items-center gap-2 text-xs px-3 py-1.5 border border-gray-800 text-gray-400 rounded-none">
+            <Icon name={tool.icon} class="w-3.5 h-3.5 text-gray-500" aria-hidden="true" />
+            {tool.name}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Programming -->
+    <div>
+      <h3 class="text-xs font-medium tracking-widest uppercase text-gray-600 mb-3">Programming</h3>
+      <div class="flex flex-wrap gap-2">
+        {skills.programming.map((lang) => (
+          <span class="inline-flex items-center gap-2 text-xs px-3 py-1.5 border border-gray-800 text-gray-400 rounded-none">
+            <Icon name={lang.icon} class="w-3.5 h-3.5 text-gray-500" aria-hidden="true" />
+            {lang.name}
           </span>
         ))}
       </div>
